@@ -4,6 +4,8 @@ import ServerConnector from "../../middleware/ServerConnector";
 import { useSelector } from "react-redux";
 import { gotTeacherTasks, teacherTasks } from '../../redux/selectors'
 import { Modal, ModalBody, ModalHeader, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import AddTaskButton from "../widgets/AddTaskButton";
+import RefreshPageButton from "../widgets/RefreshPageButton";
 
 function buildView(item, onClick){
     return(
@@ -16,11 +18,10 @@ function buildView(item, onClick){
 }
 
 function TeacherTasks() {
-        console.log(err)
+
     const [isModalOpen, setIsModalOpen] = useState(false)
     const items = useSelector(teacherTasks)
     const asked = useSelector(gotTeacherTasks)
-    console.log(items)
 
     useEffect(() => {
         if(!asked){
@@ -34,6 +35,10 @@ function TeacherTasks() {
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen)
+    }
+
+    const handleRefresh = () => {
+        ServerConnector.getTeachersListOfTasks()
     }
 
     const handleSubmit = (e) => {
@@ -94,10 +99,11 @@ function TeacherTasks() {
             <div className="flex-vertical student-tasks height-100">
 
                 <div className="flex-horizontal space-between margin-bottom-13">
-                    <h1 className="preferences-header">Tasks</h1>
-                    <button onClick={() => onAddTaskClicked()}>
-                        Add Task
-                    </button>
+                    <div className="flex-horizontal">
+                        <h1 className="preferences-header margin-right-15">Tasks</h1>
+                        <RefreshPageButton onClick={() => handleRefresh()}/>
+                    </div>
+                    <AddTaskButton onClick={onAddTaskClicked}/>
                 </div>
                 {items !== null && 
                     <div className="height-100 width-100 my-scrollbar">

@@ -4,6 +4,7 @@ import './ListComponent.css'
 import ServerConnector from "../../middleware/ServerConnector";
 import { useSelector } from "react-redux";
 import { gotStudentTasks, studentTasks } from '../../redux/selectors'
+import RefreshPageButton from "../widgets/RefreshPageButton";
 
 function buildView(item, onClick){
     return(
@@ -21,7 +22,6 @@ function StudentTasksList() {
     const asked = useSelector(gotStudentTasks)
     const [sortBy, setSortBy] = useState("date")
     const [order, setOrder] = useState("up")
-    console.log(items)
 
     useEffect(() => {
         if(!asked){
@@ -29,10 +29,16 @@ function StudentTasksList() {
         }
     })
 
+    const handleRefresh = () => {
+        ServerConnector.getStudentsListOfTasks()
+    }
+
     return(
         <div className="flex-vertical student-tasks height-100">
-
-            <h1 className="preferences-header">Hometasks</h1>
+            <div className="flex-horizontal">
+                <h1 className="preferences-header margin-right-15">Hometasks</h1>
+                <RefreshPageButton onClick={() => handleRefresh()}/>
+            </div>
             <div className="flex-horizontal margin-13-0">
                 <label onClick={() =>{
                     setSortBy("date")

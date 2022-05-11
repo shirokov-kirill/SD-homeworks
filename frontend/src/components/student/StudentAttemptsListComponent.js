@@ -3,6 +3,7 @@ import ServerConnector from "../../middleware/ServerConnector"
 import { useSelector } from "react-redux"
 import './ListComponent.css'
 import { gotStudentAttempts, studentAttempts } from "../../redux/selectors"
+import RefreshPageButton from "../widgets/RefreshPageButton"
 
 function buildView(item, onClick){
     return(
@@ -19,7 +20,6 @@ function StudentAttemptsList() {
     const items = useSelector(studentAttempts)
 
     const asked = useSelector(gotStudentAttempts)
-    console.log(items)
 
     useEffect(() => {
         if(!asked){
@@ -27,10 +27,16 @@ function StudentAttemptsList() {
         }
     })
 
+    const handleRefresh = () => {
+        ServerConnector.getStudentsListOfAttempts()
+    }
+
     return(
         <div className="flex-vertical student-tasks height-100">
-
-            <h1 className="preferences-header margin-bottom-13">Your attempts</h1>
+            <div className="flex-horizontal">
+                <h1 className="preferences-header margin-right-15">Your attempts</h1>
+                <RefreshPageButton onClick={() => handleRefresh()}/>
+            </div>
             <div className="height-100 width-100 my-scrollbar">
                 {items !== null && items.map(item => buildView(item, () => {
                     console.log("Hi!")
