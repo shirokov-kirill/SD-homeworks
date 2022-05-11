@@ -1,4 +1,4 @@
-import { SET_STUDENTS_TASKS, GET_STUDENTS_TASKS_FAILED, SET_STUDENTS_ATTEMPTS, GET_STUDENTS_ATTEMPTS_FAILED } from './ActionTypes'
+import { SET_STUDENTS_TASKS, GET_STUDENTS_TASKS_FAILED, SET_STUDENTS_ATTEMPTS, GET_STUDENTS_ATTEMPTS_FAILED, SET_TEACHERS_TASKS, GET_TEACHERS_TASKS_FAILED, SET_TEACHERS_HOMEWORKS, GET_TEACHERS_HOMEWORKS_FAILED, TEACHERS_APPEND_TASK, TEACHERS_APPEND_TASK_FAILED } from './ActionTypes'
 
 export const setStudentsTasksAction = (payload) => {
     return {
@@ -24,6 +24,48 @@ export const setStudentsAttemptsAction = (payload) => {
 export const getStudentsAttemptsFailedAction = (payload) => {
     return {
         type: GET_STUDENTS_ATTEMPTS_FAILED,
+        payload: payload
+    }
+}
+
+export const setTeachersTasksAction = (payload) => {
+    return {
+        type: SET_TEACHERS_TASKS,
+        payload: payload
+    }
+}
+
+export const getTeachersTasksFailedAction = (payload) => {
+    return {
+        type: GET_TEACHERS_TASKS_FAILED,
+        payload: payload
+    }
+}
+
+export const setTeachersHomeworksAction = (payload) => {
+    return {
+        type: SET_TEACHERS_HOMEWORKS,
+        payload: payload
+    }
+}
+
+export const getTeachersHomeworksFailedAction = (payload) => {
+    return {
+        type: GET_TEACHERS_HOMEWORKS_FAILED,
+        payload: payload
+    }
+}
+
+export const teachersAppendTask = (payload) => {
+    return {
+        type: TEACHERS_APPEND_TASK,
+        payload: payload
+    }
+}
+
+export const teachersAppendTaskFailedAction = (payload) => {
+    return {
+        type: TEACHERS_APPEND_TASK_FAILED,
         payload: payload
     }
 }

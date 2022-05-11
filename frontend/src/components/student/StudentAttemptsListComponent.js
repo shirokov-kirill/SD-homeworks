@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { getStudentsListOfAttempts } from "../../middleware/ServerConnector"
 import { useSelector } from "react-redux"
 import './ListComponent.css'
+import { gotStudentAttempts, studentAttempts } from "../../redux/selectors"
 
 function buildView(item, onClick){
     return(
@@ -15,15 +16,21 @@ function buildView(item, onClick){
 
 function StudentAttemptsList() {
 
-    const items = useSelector(state => state.student.attempts)
+    const items = useSelector(studentAttempts)
+
+    const asked = useSelector(gotStudentAttempts)
+    console.log(items)
 
     useEffect(() => {
-        getStudentsListOfAttempts()
+        if(!asked){
+            getStudentsListOfAttempts()
+        }
     })
 
     return(
         <div className="flex-vertical student-tasks height-100">
-            <h1 className="preferences-header margin-13-0">Attempts</h1>
+
+            <h1 className="preferences-header margin-bottom-13">Your attempts</h1>
             <div className="height-100 width-100 my-scrollbar">
                 {items !== null && items.map(item => buildView(item, () => {
                     console.log("Hi!")

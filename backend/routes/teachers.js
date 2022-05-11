@@ -3,22 +3,33 @@ const router = express.Router();
 const Hometasks = require('../models/hometask')
 const Homeworks = require('../models/homework')
 
-router.get('/', function (req, res, next) {
-    //TODO
+router.get('/homeworks', function(req, res, next){
+    Homeworks.find({}, docs => {
+        res.status = 200
+        res.send(docs)
+    })
+});
+
+router.get('/tasks', function(req, res, next){
+    Hometasks.find({}, docs => {
+        res.status = 200
+        res.send(docs)
+    })
 });
 
 router.post('/addtask', function(req, res, next) {
     const body = req.body
-    const name = body.name
-    const date = body.date
     const task = body.task
-    const expirationDate = body.expirationDate
-    const checker = body.checker
+    const name = task.name
+    const date = task.date
+    const description = task.description
+    const expirationDate = task.expirationDate
+    const checker = task.checker
 
     Hometasks.create({
         'name': name,
         'date': date,
-        'task': task,
+        'task': description,
         'expirationDate': expirationDate,
         'checker': checker
     }, (err, doc) => {
@@ -26,21 +37,6 @@ router.post('/addtask', function(req, res, next) {
             res.status(500)
         }
         res.status(200)
-    })
-});
-
-router.post('/checkresults/:taskId', function(req, res, next) {
-    const taskId = req.params.taskId
-
-    Homeworks.find({
-        'hometaskId': taskId
-    }, (err, docs) => {
-        if(err){
-            res.status(500)
-        }
-        //TODO sort
-        res.status(200)
-        res.send({items: docs})
     })
 });
 

@@ -21,8 +21,8 @@ const hometaskSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    checkerId: {
-        type: Number,
+    checker: {
+        type: String,
         required: true
     }
 });

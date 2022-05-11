@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri'
 import './ListComponent.css'
-import { Label, Media, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { Button } from "bootstrap";
 import { getStudentsListOfTasks } from "../../middleware/ServerConnector";
 import { useSelector } from "react-redux";
 import { gotStudentTasks, studentTasks } from '../../redux/selectors'
@@ -33,25 +31,6 @@ function StudentTasksList() {
 
     return(
         <div className="flex-vertical student-tasks height-100">
-
-            <Modal>
-                <ModalHeader>
-                    Submit your task
-                </ModalHeader>
-                <ModalBody>
-                    <Label>
-                        Enter
-                    </Label>
-                    <Media.text>
-                        Hi!
-                    </Media.text>
-                </ModalBody>
-                <ModalFooter>
-                    <Button>
-                        Submit
-                    </Button>
-                </ModalFooter>
-            </Modal>
 
             <h1 className="preferences-header">Hometasks</h1>
             <div className="flex-horizontal margin-13-0">
