@@ -19,7 +19,9 @@ router.get('/tasks', function(req, res, next){
 
 router.post('/addtask', function(req, res, next) {
     const body = req.body
+    console.log(body)
     const task = body.task
+    console.log(task)
     const name = task.name
     const date = task.date
     const description = task.description
