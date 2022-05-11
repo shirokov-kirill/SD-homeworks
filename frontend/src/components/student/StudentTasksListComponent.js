@@ -11,7 +11,7 @@ function buildView(item, onClick){
         <div className="list-item" onClick={() => {
             onClick()
         }}>
-            Hi! I'm Adam!
+            {item.name}
         </div>
     )
 }
