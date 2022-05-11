@@ -1,0 +1,23 @@
+#background {
+  width: 100%; 
+  height: 100%; 
+  position: fixed;
+  z-index: -1;
+}
+
+.stretch {
+  width:100%;
+  height:100%;
+}
+
+#background-shader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+
+  background: rgba(255, 255, 255, 0.0);
+  backdrop-filter: blur(3px);
+}
