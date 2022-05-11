@@ -5,8 +5,8 @@ const Homeworks = require('../models/homework')
 
 router.get('/tasks', function (req, res, next) {
     console.log("GET tasks")
-    Hometasks.find({}, (docs) => {
-        res.status = 200
+    Hometasks.find({}, function(err, docs){
+        res.status(200)
         res.send(docs)
     })
 });

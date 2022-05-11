@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { getTeachersListOfHomeworks } from "../../middleware/ServerConnector"
+import ServerConnector from "../../middleware/ServerConnector"
 import { useSelector } from "react-redux"
 import './ListComponent.css'
 import { gotTeacherHomeworks, teacherHomeworks } from "../../redux/selectors"
@@ -23,7 +23,7 @@ function TeacherHomeworks() {
 
     useEffect(() => {
         if(!asked){
-            getTeachersListOfHomeworks()
+            ServerConnector.getTeachersListOfHomeworks()
         }
     })
 
@@ -32,7 +32,7 @@ function TeacherHomeworks() {
             <h1 className="preferences-header margin-bottom-13">Students' attempts</h1>
             {items !== null && items.length > 0 &&
                 <div className="height-100 width-100 my-scrollbar">
-                    {items !== null && items.map(item => buildView(item, () => {
+                    {items.map(item => buildView(item, () => {
                             console.log("Hi!")
                         }
                     ))}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri'
 import './ListComponent.css'
-import { getStudentsListOfTasks } from "../../middleware/ServerConnector";
+import ServerConnector from "../../middleware/ServerConnector";
 import { useSelector } from "react-redux";
 import { gotStudentTasks, studentTasks } from '../../redux/selectors'
 
@@ -25,7 +25,7 @@ function StudentTasksList() {
 
     useEffect(() => {
         if(!asked){
-            getStudentsListOfTasks()
+            ServerConnector.getStudentsListOfTasks()
         }
     })
 

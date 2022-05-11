@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 
 const hometaskSchema = mongoose.Schema({
-    lessonId: {
-        type: String,
-        required: true
-    },
     name: {
         type: String,
         required: true
     },
     date: {
-        type: Date,
+        type: String,
         required: true
     },
     task: {
@@ -18,7 +14,7 @@ const hometaskSchema = mongoose.Schema({
         required: true
     },
     expirationDate: {
-        type: Date,
+        type: String,
         required: true
     },
     checker: {

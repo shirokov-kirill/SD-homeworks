@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getStudentsListOfAttempts } from "../../middleware/ServerConnector"
+import ServerConnector from "../../middleware/ServerConnector"
 import { useSelector } from "react-redux"
 import './ListComponent.css'
 import { gotStudentAttempts, studentAttempts } from "../../redux/selectors"
@@ -23,7 +23,7 @@ function StudentAttemptsList() {
 
     useEffect(() => {
         if(!asked){
-            getStudentsListOfAttempts()
+            ServerConnector.getStudentsListOfAttempts()
         }
     })
 

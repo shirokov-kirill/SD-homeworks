@@ -1,64 +1,71 @@
-import axios, { Axios } from "axios"
+import axios from "axios"
 import { getStudentsAttemptsFailedAction, getStudentsTasksFailedAction, getTeachersHomeworksFailedAction, getTeachersTasksFailedAction, setStudentsAttemptsAction, setStudentsTasksAction, setTeachersHomeworksAction, setTeachersTasksAction, teachersAppendTask, teachersAppendTaskFailedAction } from "../redux/actions"
+import {Component} from "react";
+import {store} from "../redux/store";
 
+export default class ServerConnector extends Component{
 
-export const getStudentsListOfAttempts = async () => {
-    try {
-        const response = await axios.get('http://127.0.0.1:8080/student/attempts')
-        const attempts = JSON.parse(response)
-        setStudentsAttemptsAction(attempts)
-    } catch(error) {
-        getStudentsAttemptsFailedAction(error.message)
-    }
-}
-
-export const getStudentsListOfTasks = async () => {
-    try {
-        const response = await axios.get('http://127.0.0.1:8080/student/tasks')
-        const tasks = JSON.parse(response)
-        setStudentsTasksAction(tasks)
-    } catch (error) {
-        getStudentsTasksFailedAction(error.message)
-    }
-}
-
-export const getTeachersListOfHomeworks = async () => {
-    try{
-        const response = await axios.get('http://127.0.0.1:8080/teacher/homeworks')
-        const homeworks = JSON.parse(response)
-        setTeachersHomeworksAction(homeworks)
-    } catch(error){
-        getTeachersHomeworksFailedAction(error.message)
-    }
-}
-
-export const getTeachersListOfTasks = async () => {
-    try{
-        const response = await axios.get('http://127.0.0.1:8080/teacher/tasks')
-        const tasks = JSON.parse(response)
-        setTeachersTasksAction(tasks)
-    } catch(error) {
-        getTeachersTasksFailedAction(error.message)
-    }
-}
-
-export const appendTask = async (task) => {
-    try{
-        const response = await axios.post('http://127.0.0.1:8080/teacher/addtask', {...task})
-        if(response.status === 200){
-            teachersAppendTask(task)
-        } else {
-            console.log(response.status)
+    static getStudentsListOfAttempts = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8080/student/attempts')
+            const attempts = response.data
+            store.dispatch(setStudentsAttemptsAction(attempts))
+        } catch(error) {
+            store.dispatch(getStudentsAttemptsFailedAction(error.message))
         }
-    } catch(error) {
-        teachersAppendTaskFailedAction(error.message)
     }
-}
 
-export const sumbitAttempt = (attempt, callback) => {
-    axios.post('http://127.0.0.1:8080/student/attempts', {...attempt})
-    .then(response => {
-        //TODO
-        callback()
-    })
+    static getStudentsListOfTasks = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8080/student/tasks')
+            console.log(response)
+            const tasks = response.data
+            console.log(tasks)
+            store.dispatch(setStudentsTasksAction(tasks))
+        } catch (error) {
+            store.dispatch(getStudentsTasksFailedAction(error.message))
+        }
+    }
+
+    static getTeachersListOfHomeworks = async () => {
+        try{
+            const response = await axios.get('http://127.0.0.1:8080/teacher/homeworks')
+            const homeworks = response.data
+            store.dispatch(setTeachersHomeworksAction(homeworks))
+        } catch(error){
+            store.dispatch(getTeachersHomeworksFailedAction(error.message))
+        }
+    }
+
+    static getTeachersListOfTasks = async () => {
+        try{
+            const response = await axios.get('http://127.0.0.1:8080/teacher/tasks')
+            const tasks = response.data
+            store.dispatch(setTeachersTasksAction(tasks))
+        } catch(error) {
+            store.dispatch(getTeachersTasksFailedAction(error.message))
+        }
+    }
+
+    static appendTask = async (task) => {
+        try{
+            const response = await axios.post('http://127.0.0.1:8080/teacher/addtask', {...task})
+            if(response.status === 200){
+                store.dispatch(teachersAppendTask(task))
+            } else {
+                console.log(response.status)
+            }
+        } catch(error) {
+            store.dispatch(teachersAppendTaskFailedAction(error.message))
+        }
+    }
+
+    static sumbitAttempt = (attempt, callback) => {
+        axios.post('http://127.0.0.1:8080/student/attempts', {...attempt})
+            .then(response => {
+                //TODO
+                callback()
+            })
+    }
+
 }

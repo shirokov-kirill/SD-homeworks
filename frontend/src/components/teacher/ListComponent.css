@@ -11,3 +11,14 @@
     border-radius: 8px;
     margin-bottom: 6px;
 }
+
+.margin-bottom-13{
+    margin-bottom: 13px;
+}
+
+.add-task-button {
+    padding: 5px 10px;
+    color: #99A0A3;
+    border: #99A0A3 solid 3px;
+    background: none;
+}

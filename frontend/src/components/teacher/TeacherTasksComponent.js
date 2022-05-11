@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import './ListComponent.css'
-import { appendTask, getTeachersListOfTasks } from "../../middleware/ServerConnector";
+import ServerConnector from "../../middleware/ServerConnector";
 import { useSelector } from "react-redux";
 import { gotTeacherTasks, teacherTasks } from '../../redux/selectors'
 import { Modal, ModalBody, ModalHeader, Form, FormGroup, Label, Input, Button } from "reactstrap";
@@ -16,7 +16,7 @@ function buildView(item, onClick){
 }
 
 function TeacherTasks() {
-
+        console.log(err)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const items = useSelector(teacherTasks)
     const asked = useSelector(gotTeacherTasks)
@@ -24,7 +24,7 @@ function TeacherTasks() {
 
     useEffect(() => {
         if(!asked){
-            getTeachersListOfTasks()
+            ServerConnector.getTeachersListOfTasks()
         }
     })
 
@@ -55,7 +55,7 @@ function TeacherTasks() {
             date: fromDate,
             checker: checker
         }
-        appendTask(task)
+        ServerConnector.appendTask(task)
         e.preventDefault()
     }
 
