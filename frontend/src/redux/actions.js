@@ -1,4 +1,16 @@
-import { SET_STUDENTS_TASKS, GET_STUDENTS_TASKS_FAILED, SET_STUDENTS_ATTEMPTS, GET_STUDENTS_ATTEMPTS_FAILED, SET_TEACHERS_TASKS, GET_TEACHERS_TASKS_FAILED, SET_TEACHERS_HOMEWORKS, GET_TEACHERS_HOMEWORKS_FAILED, TEACHERS_APPEND_TASK, TEACHERS_APPEND_TASK_FAILED } from './ActionTypes'
+import {
+    SET_STUDENTS_TASKS,
+    GET_STUDENTS_TASKS_FAILED,
+    SET_STUDENTS_ATTEMPTS,
+    GET_STUDENTS_ATTEMPTS_FAILED,
+    SET_TEACHERS_TASKS,
+    GET_TEACHERS_TASKS_FAILED,
+    SET_TEACHERS_HOMEWORKS,
+    GET_TEACHERS_HOMEWORKS_FAILED,
+    TEACHERS_APPEND_TASK,
+    TEACHERS_APPEND_TASK_FAILED,
+    STUDENTS_APPEND_ATTEMPT, STUDENTS_APPEND_ATTEMPT_FAILED
+} from './ActionTypes'
 
 export const setStudentsTasksAction = (payload) => {
     return {
@@ -66,6 +78,20 @@ export const teachersAppendTask = (payload) => {
 export const teachersAppendTaskFailedAction = (payload) => {
     return {
         type: TEACHERS_APPEND_TASK_FAILED,
+        payload: payload
+    }
+}
+
+export const studentAddAttempt = (payload) => {
+    return {
+        type: STUDENTS_APPEND_ATTEMPT,
+        payload: payload
+    }
+}
+
+export const studentAddAttemptFailedAction = (payload) => {
+    return {
+        type: STUDENTS_APPEND_ATTEMPT_FAILED,
         payload: payload
     }
 }

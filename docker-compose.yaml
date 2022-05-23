@@ -1,39 +1,16 @@
 version: '3.3'
 services:
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: 'rabbitmq'
+        ports:
+            - 15672:15672
+            - 5672:5672
     mongo:
-        network_mode: "host"
         image: mongo:latest
-        restart: always
-        container_name: SD_test_mongo
-        volumes: 
-            - "/etc/timezone:/etc/timezone:ro"
-            - "/etc/localtime:/etc/localtime:ro"
-            - db-content:/data/db
-        healthcheck:
-            test: mongo localhost:27017/test | mongo show dbs
-            interval: 1m
-            timeout: 15m
-            retries: 5
-    backend:
-        network_mode: "host"
-        env_file:
-            - ./backend/.env
-        build:
-            context: ./backend
-        image: sd_test_backend_image
-        container_name: SD_test_backend
-        volumes: 
-            - "/etc/timezone:/etc/timezone:ro"
-            - "/etc/localtime:/etc/localtime:ro"
-            - static-content:/files
-    frontend:
-        network_mode: "host"
-        build:
-            context: ./frontend
-        container_name: sd_test_frontend
-        volumes: 
-            - "/etc/timezone:/etc/timezone:ro"
-            - "/etc/localtime:/etc/localtime:ro"
+        container_name: 'mongo'
+        ports:
+            - 27017:27017
 volumes:
   static-content:
   db-content:

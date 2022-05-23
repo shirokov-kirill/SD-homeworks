@@ -6,14 +6,11 @@ import { gotTeacherTasks, teacherTasks } from '../../redux/selectors'
 import { Modal, ModalBody, ModalHeader, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import AddTaskButton from "../widgets/AddTaskButton";
 import RefreshPageButton from "../widgets/RefreshPageButton";
+import TeacherTaskListItem from "../general/TeacherTaskListItem";
 
-function buildView(item, onClick){
+function buildView(item){
     return(
-        <div className="list-item" onClick={() => {
-            onClick()
-        }}>
-            {item.name}
-        </div>
+        <TeacherTaskListItem item={item}/>
     )
 }
 
@@ -107,10 +104,7 @@ function TeacherTasks() {
                 </div>
                 {items !== null && 
                     <div className="height-100 width-100 my-scrollbar">
-                        {items.map(item => buildView(item, () => {
-                                console.log("Hi!")
-                            }
-                        ))}
+                        {items.map(item => buildView(item))}
                     </div>
                 }
             </div>

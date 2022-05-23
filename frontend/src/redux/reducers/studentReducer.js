@@ -1,4 +1,10 @@
-import { GET_STUDENTS_ATTEMPTS_FAILED, GET_STUDENTS_TASKS_FAILED, SET_STUDENTS_ATTEMPTS, SET_STUDENTS_TASKS} from "../ActionTypes"
+import {
+    GET_STUDENTS_ATTEMPTS_FAILED,
+    GET_STUDENTS_TASKS_FAILED,
+    SET_STUDENTS_ATTEMPTS,
+    SET_STUDENTS_TASKS,
+    STUDENTS_APPEND_ATTEMPT, STUDENTS_APPEND_ATTEMPT_FAILED
+} from "../ActionTypes"
 
 const initialState = {
     attempts: [],
@@ -24,6 +30,13 @@ export default function studentReducer(state = initialState, action) {
                 tasks: action.payload
             }
         case GET_STUDENTS_TASKS_FAILED:
+            return state
+        case STUDENTS_APPEND_ATTEMPT:
+            return {
+                ...state,
+                attempts: state.attempts.concat([action.payload])
+            }
+        case STUDENTS_APPEND_ATTEMPT_FAILED:
             return state
         default:
             return state

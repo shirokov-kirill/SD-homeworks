@@ -5,14 +5,11 @@ import ServerConnector from "../../middleware/ServerConnector";
 import { useSelector } from "react-redux";
 import { gotStudentTasks, studentTasks } from '../../redux/selectors'
 import RefreshPageButton from "../widgets/RefreshPageButton";
+import StudentTaskListItem from "../general/StudentTaskListItem";
 
-function buildView(item, onClick){
+function buildView(item){
     return(
-        <div className="list-item" onClick={() => {
-            onClick()
-        }}>
-            {item.name}
-        </div>
+        <StudentTaskListItem item={item}/>
     )
 }
 
@@ -75,11 +72,9 @@ function StudentTasksList() {
                     </div>
                 </label>
             </div>
-            <div className="height-100 width-100 my-scrollbar">
-                {items !== null && items.map(item => buildView(item, () => {
-                    console.log("Hi!")
-                }))}
-            </div>
+            {items !== null && <div className="height-100 width-100 my-scrollbar">
+                {items.map(item => buildView(item))}
+            </div>}
         </div>
     );
 

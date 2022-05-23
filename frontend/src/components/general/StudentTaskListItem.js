@@ -1,7 +1,10 @@
 import { useState } from "react"
+import {Modal, ModalBody, ModalHeader, Form, FormGroup, Label, Button, Input} from "reactstrap";
+import "./ListItem.css"
+import ServerConnector from "../../middleware/ServerConnector";
 
 
-export default function TaskListItem({item}){
+export default function StudentTaskListItem({item}){
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -10,8 +13,11 @@ export default function TaskListItem({item}){
     }
 
     const handleSubmit = (e) => {
-        //TODO
         e.preventDefault()
+        const text = document.getElementById('answer').value
+        document.getElementById('answer').value = ''
+        ServerConnector.submitAttempt({text: text}, item.id)
+        toggleModal()
     }
 
     return(
@@ -31,10 +37,6 @@ export default function TaskListItem({item}){
                         <FormGroup>
                             <Label htmlFor="todate">Until</Label>
                             <p>{item.expirationDate}</p>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="exp-date">Exp. Date</Label>
-                            <Input type="date" id="exp-date" name="exp-date"></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="answer">Answer</Label>

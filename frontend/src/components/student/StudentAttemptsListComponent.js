@@ -10,7 +10,7 @@ function buildView(item, onClick){
         <div className="list-item" onClick={() => {
             onClick()
         }}>
-            {item.name}
+            {item.hometaskId}
         </div>
     )
 }
@@ -33,7 +33,7 @@ function StudentAttemptsList() {
 
     return(
         <div className="flex-vertical student-tasks height-100">
-            <div className="flex-horizontal">
+            <div className="flex-horizontal margin-bottom-13">
                 <h1 className="preferences-header margin-right-15">Your attempts</h1>
                 <RefreshPageButton onClick={() => handleRefresh()}/>
             </div>
