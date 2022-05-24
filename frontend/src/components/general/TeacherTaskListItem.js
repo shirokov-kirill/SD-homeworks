@@ -13,7 +13,7 @@ export default function TeacherTaskListItem({item}){
     return(
         <div>
             <Modal isOpen={isModalOpen} toggle={() => toggleModal()}>
-                <ModalHeader>Add Task</ModalHeader>
+                <ModalHeader>Task</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={(e) => {toggleModal(); e.preventDefault()}}>
                         <FormGroup>
@@ -26,7 +26,7 @@ export default function TeacherTaskListItem({item}){
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="todate">Until</Label>
-                            <p>{item.expirationDate}</p>
+                            <p>{new Date(item.expirationDate.slice(0, -1)).toString()}</p>
                         </FormGroup>
                         <Button type="submit" value="submit" className="bg-primary">Close</Button>
                     </Form>

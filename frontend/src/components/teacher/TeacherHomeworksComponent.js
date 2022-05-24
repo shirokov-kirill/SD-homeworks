@@ -4,14 +4,11 @@ import { useSelector } from "react-redux"
 import './ListComponent.css'
 import { gotTeacherHomeworks, teacherHomeworks } from "../../redux/selectors"
 import RefreshPageButton from "../widgets/RefreshPageButton"
+import StudentAttemptListItem from "../general/StudentAttemptListItem";
 
 function buildView(item, onClick){
     return(
-        <div className="list-item" onClick={() => {
-            onClick()
-        }}>
-            {item.hometaskId}
-        </div>
+        <StudentAttemptListItem item={item} onClick={onClick}/>
     )
 }
 

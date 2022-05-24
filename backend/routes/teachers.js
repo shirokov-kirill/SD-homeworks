@@ -6,7 +6,6 @@ const {publish} = require("./publisher");
 router.get('/homeworks', function(req, res, next){
     console.log("GET teacher/homeworks")
     Homeworks.find({}, function(err, docs){
-        console.log(docs)
         res.status(200)
         res.set("Access-Control-Allow-Origin", "*")
         res.send(docs)
@@ -16,7 +15,6 @@ router.get('/homeworks', function(req, res, next){
 router.get('/tasks', function(req, res, next){
     console.log("GET teacher/tasks")
     Hometasks.find({}, function (err, docs){
-        console.log(docs)
         res.status(200)
         res.set("Access-Control-Allow-Origin", "*")
         res.send(docs)

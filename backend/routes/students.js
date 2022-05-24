@@ -5,7 +5,8 @@ const {publish} = require("./publisher");
 
 router.get('/tasks', function (req, res, next) {
     console.log("GET tasks")
-    Hometasks.find({}, function(err, docs){
+    let currentDate = new Date().toISOString();
+    Hometasks.find({'date': { $lte: currentDate }, 'expirationDate': { $gte: currentDate}}).sort({expirationDate: 1}).exec(function(err, docs){
         res.status(200)
         res.set("Access-Control-Allow-Origin", "*")
         res.send(docs)
@@ -14,7 +15,7 @@ router.get('/tasks', function (req, res, next) {
 
 router.get('/attempts', function(req, res, next){
     console.log("GET attempts")
-    Homeworks.find({}, (err, docs) => {
+    Homeworks.find({'result.status': 'Checked'}, (err, docs) => {
         if(err){
             res.status(500)
             res.set("Access-Control-Allow-Origin", "*")

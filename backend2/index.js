@@ -27,8 +27,6 @@ const receive1 = async () => {
                     'task': description,
                     'expirationDate': new Date(expirationDate)
                 }, (err, doc) => {
-                    console.log(doc)
-                    console.log(err)
                     if (err) {
                         return
                     }
@@ -40,7 +38,6 @@ const receive1 = async () => {
                         if (err === null) {
                             channel.ack(message)
                         }
-                        console.log(doc)
                     })
                 })
             })
@@ -62,38 +59,20 @@ const receive2 = async () => {
             const taskId = json.taskId
             const textAnswer = json.text
             const date = new Date()
-            console.log(taskId)
             Checkers.findOne({'taskId': taskId}, (err, doc) => {
                 if(err){
                     return
                 }
-                console.log(doc)
                 const result = eval(doc.checker)({answer: textAnswer, date: date})
                 const mark = result.result
                 const comments = result.comments
-                console.log(mark)
-                console.log(comments)
                 Homeworks.updateOne({'id': json.attemptId}, {'result': {'mark': mark, 'comments': comments, 'status': "Checked"}}, (err, doc) => {
-                    console.log(err)
-                    console.log(doc)
                     channel.ack(message)
                 })
             })
         })
     } catch (ex){
         console.log(ex)
-    }
-}
-
-const receive1proc = async () => {
-    while (true){
-        await receive1()
-    }
-}
-
-const receive2proc = async () => {
-    while (true){
-        await receive2()
     }
 }
 

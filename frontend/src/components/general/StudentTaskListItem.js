@@ -36,7 +36,7 @@ export default function StudentTaskListItem({item}){
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="todate">Until</Label>
-                            <p>{item.expirationDate}</p>
+                            <p>{new Date(item.expirationDate.slice(0, -1)).toString()}</p>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="answer">Answer</Label>
