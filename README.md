@@ -15,7 +15,7 @@
 
 ## Components Diagram
 
-![Сomponent](architechture/HomeworksDiagram.png)
+![Сomponent](architecture/HomeworksDiagram.png)
 
 Приложение разделено на две основныее части: клиентскую и серверную.
 
@@ -41,4 +41,4 @@
 
 ### Схема базы данных
 
-![Database](architechture/DatabaseSchema.png)
+![Database](architecture/DatabaseSchema.png)
