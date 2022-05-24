@@ -8,8 +8,7 @@ import {
     setStudentsTasksAction,
     setTeachersHomeworksAction,
     setTeachersTasksAction,
-    studentAddAttempt, studentAddAttemptFailedAction,
-    teachersAppendTask,
+    studentAddAttemptFailedAction,
     teachersAppendTaskFailedAction
 } from "../redux/actions"
 import {Component} from "react";
@@ -62,9 +61,7 @@ export default class ServerConnector extends Component{
     static appendTask = async (task) => {
         try{
             const response = await axios.post('http://localhost:8080/teacher/tasks', {...task})
-            if(response.status === 200){
-                store.dispatch(teachersAppendTask(response.data))
-            } else {
+            if(response.status !== 200){
                 console.log(response.status)
             }
         } catch(error) {
@@ -75,9 +72,7 @@ export default class ServerConnector extends Component{
     static submitAttempt = async (attempt, taskId) => {
         axios.post(`http://localhost:8080/student/attempts/${taskId}`, {...attempt})
             .then(response => {
-                if(response.status === 200){
-                    studentAddAttempt(response.data)
-                } else {
+                if(response.status !== 200){
                     alert("Failed to process your answer. Please check your internet connection and come back later.")
                     studentAddAttemptFailedAction(null)
                 }
