@@ -9,7 +9,7 @@
 5. Goto /backend. Run `npm i` and `npm start`
 6. Goto /backend2. Run `npm i` and `npm start`
 7. Goto /frontend. Run `npm i` and `npm start`
-8. Goto `localhost:3000`
+8. Goto [localhost:3000](localhost:3000)
 
 ## Architecture
 
