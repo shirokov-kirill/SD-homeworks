@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const hometaskSchema = mongoose.Schema({
     id: {
         type: Number,
@@ -24,6 +25,11 @@ const hometaskSchema = mongoose.Schema({
 });
 
 
-const hometasks = mongoose.model('Hometasks', hometaskSchema);
+let hometasks;
 
+if (mongoose.models.Hometasks) {
+    hometasks = mongoose.model('Hometasks');
+} else {
+    hometasks = mongoose.model('Hometasks', hometaskSchema);
+}
 module.exports = hometasks;

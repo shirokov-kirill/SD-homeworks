@@ -1,47 +1,31 @@
-const express = require('express');
-const router = express.Router();
-const Hometasks = require('../models/hometask')
-const Homeworks = require('../models/homework')
+const router = require('express').Router()
+const Hometasks = require('../models/hometask');
+const Homeworks = require('../models/homework');
+const {publish} = require("./publisher");
 
-router.get('/', function (req, res, next) {
-    //TODO
-});
-
-router.post('/addtask', function(req, res, next) {
-    const body = req.body
-    const name = body.name
-    const date = body.date
-    const task = body.task
-    const expirationDate = body.expirationDate
-    const checker = body.checker
-
-    Hometasks.create({
-        'name': name,
-        'date': date,
-        'task': task,
-        'expirationDate': expirationDate,
-        'checker': checker
-    }, (err, doc) => {
-        if(err){
-            res.status(500)
-        }
+router.get('/homeworks', function(req, res, next){
+    console.log("GET teacher/homeworks")
+    Homeworks.find({}, function(err, docs){
         res.status(200)
+        res.set("Access-Control-Allow-Origin", "*")
+        res.send(docs)
     })
 });
 
-router.post('/checkresults/:taskId', function(req, res, next) {
-    const taskId = req.params.taskId
-
-    Homeworks.find({
-        'hometaskId': taskId
-    }, (err, docs) => {
-        if(err){
-            res.status(500)
-        }
-        //TODO sort
+router.get('/tasks', function(req, res, next){
+    console.log("GET teacher/tasks")
+    Hometasks.find({}, function (err, docs){
         res.status(200)
-        res.send({items: docs})
+        res.set("Access-Control-Allow-Origin", "*")
+        res.send(docs)
     })
+});
+
+router.post('/tasks', async (req, res, next) => {
+    await publish("checkers", {name: req.body.name, description: req.body.description, date: req.body.date, expirationDate: req.body.expirationDate, checker: req.body.checker})
+    res.status(200)
+    res.set("Access-Control-Allow-Origin", "*")
+    res.send()
 });
 
 module.exports = router;

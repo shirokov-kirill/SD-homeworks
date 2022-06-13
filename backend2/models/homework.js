@@ -34,6 +34,11 @@ const homeworkSchema = mongoose.Schema({
 });
 
 
-const homeworks = mongoose.model('HomeWorks', homeworkSchema);
+let homeworks;
 
+if (mongoose.models.Homeworks) {
+    homeworks = mongoose.model('Homeworks');
+} else {
+    homeworks = mongoose.model('Homeworks', homeworkSchema);
+}
 module.exports = homeworks;
